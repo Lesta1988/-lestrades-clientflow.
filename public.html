@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tell Lestrades what gadget or service you need and our team will get back to you." />
+  <title>Tell Us What You Need | Lestrades</title>
+  <link rel="stylesheet" href="public.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="brand">LESTRADES</div>
+      <span class="badge">Anything Apple. Everything Gadget.</span>
+      <h1>What can we help you get?</h1>
+      <p>Tell us what you’re looking for. Our team will contact you with the best available option.</p>
+    </section>
+
+    <section class="card">
+      <form id="leadForm">
+        <div class="field">
+          <label for="name">Your name *</label>
+          <input id="name" name="name" autocomplete="name" required placeholder="e.g. Ama Mensah" />
+        </div>
+
+        <div class="field">
+          <label for="phone">WhatsApp number *</label>
+          <input id="phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="e.g. 024 123 4567" />
+          <small>We’ll use this to respond to your request.</small>
+        </div>
+
+        <div class="field">
+          <label for="interest">What are you looking for? *</label>
+          <select id="interest" name="interest" required>
+            <option value="">Choose one</option>
+            <option>iPhone</option>
+            <option>MacBook</option>
+            <option>iPad</option>
+            <option>Apple Watch</option>
+            <option>AirPods / Accessories</option>
+            <option>Samsung / Android Phone</option>
+            <option>Phone or Laptop Repair</option>
+            <option>Trade-in / Swap</option>
+            <option>Other Gadget</option>
+          </select>
+        </div>
+
+        <div class="field" id="detailsField">
+          <label for="details">Tell us exactly what you want</label>
+          <input id="details" name="details" placeholder="e.g. iPhone 15 Pro 256GB, black" />
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="budget">Budget (GHS)</label>
+            <input id="budget" name="budget" type="number" min="0" step="1" inputmode="numeric" placeholder="Optional" />
+          </div>
+
+          <div class="field">
+            <label for="timeline">When do you want it? *</label>
+            <select id="timeline" name="timeline" required>
+              <option value="">Choose one</option>
+              <option>Today</option>
+              <option>Within 3 days</option>
+              <option>Within 1 week</option>
+              <option>Within 1 month</option>
+              <option>Just checking prices</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="consent">
+          <input id="consent" type="checkbox" required />
+          <span>I agree that Lestrades may use these details to respond to my enquiry and follow up about this request.</span>
+        </label>
+
+        <button id="submitBtn" type="submit">Send Request</button>
+        <p id="status" class="status" role="status"></p>
+      </form>
+
+      <div id="success" class="success hidden">
+        <div class="check">✓</div>
+        <h2>Request received.</h2>
+        <p>Your details have been added to our enquiry list. Our team can now follow up with you.</p>
+        <a id="whatsappBtn" class="wa-btn" href="#" target="_blank" rel="noopener">Continue on WhatsApp</a>
+        <button id="anotherBtn" class="secondary">Submit another request</button>
+      </div>
+    </section>
+
+    <p class="footer">Your information is used only to handle your enquiry and customer follow-up.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="public.js"></script>
+</body>
+</html>

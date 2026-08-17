@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClientFlow CRM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">L</div><div><h1>ClientFlow</h1><p>Lestrades Acquisition CRM</p></div></div>
+      <nav>
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="clients">All Contacts</button>
+        <button class="nav-item" data-view="followups">Follow-ups</button>
+      </nav>
+      <a href="public.html?utm_source=CRM" target="_blank" class="public-link">Open Public Form ↗</a>
+      <div class="sidebar-note"><strong>Pipeline rule</strong><span>Public submissions enter as Enquirers. Staff qualifies and promotes them.</span></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><p class="eyebrow">CLIENT ACQUISITION</p><h2 id="pageTitle">Dashboard</h2></div>
+        <div class="top-actions">
+          <button id="refreshBtn" class="secondary-btn">Refresh</button>
+          <button id="addClientBtn" class="primary-btn">+ Add Contact</button>
+        </div>
+      </header>
+
+      <div id="modeBanner" class="mode-banner"></div>
+
+      <section id="dashboardView" class="view active">
+        <div class="metric-grid">
+          <article class="metric-card"><span>Total Contacts</span><strong id="metricTotal">0</strong></article>
+          <article class="metric-card"><span>Enquirers</span><strong id="metricEnquirers">0</strong></article>
+          <article class="metric-card"><span>Potential Clients</span><strong id="metricPotential">0</strong></article>
+          <article class="metric-card"><span>Clients</span><strong id="metricClients">0</strong></article>
+          <article class="metric-card"><span>Follow-ups Due</span><strong id="metricDue">0</strong></article>
+        </div>
+
+        <div class="two-column">
+          <section class="panel"><div class="panel-header"><div><h3>Sales Pipeline</h3><p>Where every contact currently sits.</p></div></div><div id="pipelineBars" class="pipeline-bars"></div></section>
+          <section class="panel"><div class="panel-header"><div><h3>Acquisition Sources</h3><p>Know which channels create demand.</p></div></div><div id="sourceList" class="source-list"></div></section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-header"><div><h3>Recent Contacts</h3><p>Newest and recently updated enquiries.</p></div><button class="text-btn" data-go="clients">View all</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Name</th><th>Phone</th><th>Interest</th><th>Stage</th><th>Source</th><th>Follow-up</th></tr></thead><tbody id="recentTable"></tbody></table></div>
+        </section>
+      </section>
+
+      <section id="clientsView" class="view">
+        <section class="panel">
+          <div class="filter-row">
+            <input id="searchInput" type="search" placeholder="Search name, phone, product or notes..." />
+            <select id="stageFilter"><option value="">All stages</option><option>Enquirer</option><option>Potential Client</option><option>Client</option></select>
+            <select id="sourceFilter"><option value="">All sources</option></select>
+            <button id="exportBtn" class="secondary-btn">Export CSV</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Name</th><th>Phone</th><th>Interest</th><th>Stage</th><th>Source</th><th>Budget</th><th>Follow-up</th><th>Owner</th><th></th></tr></thead><tbody id="clientsTable"></tbody></table></div>
+        </section>
+      </section>
+
+      <section id="followupsView" class="view">
+        <div class="followup-grid">
+          <section class="panel"><div class="panel-header"><div><h3>Overdue & Due Today</h3><p>These should not leave the day untouched.</p></div></div><div id="dueFollowups" class="followup-list"></div></section>
+          <section class="panel"><div class="panel-header"><div><h3>Upcoming</h3><p>Planned next actions.</p></div></div><div id="upcomingFollowups" class="followup-list"></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="clientDialog">
+    <form id="clientForm" method="dialog">
+      <div class="dialog-header"><div><p class="eyebrow">CONTACT RECORD</p><h3 id="dialogTitle">Add Contact</h3></div><button type="button" id="closeDialog" class="icon-btn">×</button></div>
+      <input id="clientId" type="hidden" />
+      <div class="form-grid">
+        <label>Full name *<input id="name" required /></label>
+        <label>Phone / WhatsApp *<input id="phone" required inputmode="tel" /></label>
+        <label>Stage *<select id="stage" required><option>Enquirer</option><option>Potential Client</option><option>Client</option></select></label>
+        <label>Lead source *<input id="source" required placeholder="TikTok, WhatsApp, Walk-in..." /></label>
+        <label class="full">Product / service of interest<input id="interest" /></label>
+        <label>Estimated budget (GHS)<input id="budget" type="number" min="0" step="1" /></label>
+        <label>Buying timeline<select id="timeline"><option value="">Not sure</option><option>Today</option><option>Within 3 days</option><option>Within 1 week</option><option>Within 1 month</option><option>Just checking prices</option></select></label>
+        <label>Staff owner<input id="owner" /></label>
+        <label>Next follow-up<input id="followUp" type="date" /></label>
+        <label class="full">Notes<textarea id="notes" rows="4"></textarea></label>
+      </div>
+      <div class="dialog-actions"><button type="button" id="deleteBtn" class="danger-btn hidden">Delete</button><div class="spacer"></div><button type="button" id="cancelBtn" class="secondary-btn">Cancel</button><button type="submit" class="primary-btn">Save Contact</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
